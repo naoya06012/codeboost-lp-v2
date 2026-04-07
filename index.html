@@ -149,11 +149,11 @@ img{max-width:100%;height:auto;display:block}
   border:1px solid rgba(0,0,0,.04);
 }
 .s-card-img{width:100%;height:auto;object-fit:cover;border-radius:8px 8px 0 0}
-.s-card-placeholder{
-  width:100%;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:#e8eaed;color:#999;font-size:12px;text-align:center;padding:16px;line-height:1.6;gap:6px;
+.s-card-illust{
+  width:100%;height:160px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f0f4ff 0%,#e8eeff 100%);
 }
-.s-card-placeholder span{font-weight:700;font-size:13px;color:#777}
+.s-card-illust svg{width:auto;height:100px}
 .s-card-body{padding:18px 18px 10px}
 .s-card-title{font-size:15px;font-weight:700;line-height:1.55;margin-bottom:8px}
 .s-card-desc{font-size:13px;color:#555;line-height:1.8}
@@ -565,63 +565,175 @@ img{max-width:100%;height:auto;display:block}
   <p class="surprise-sub fade-in">横にスワイプして見てみてください</p>
   <div class="s-carousel" id="s-carousel">
     <div class="s-card fade-in">
-      <img class="s-card-img" src="images/carousel-1.png" alt="AIがブラウザ操作">
+      <div class="s-card-illust">
+        <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="20" width="140" height="95" rx="8" fill="#fff" stroke="#2563EB" stroke-width="2.5"/>
+          <rect x="30" y="20" width="140" height="18" rx="8" fill="#2563EB"/>
+          <circle cx="42" cy="29" r="3" fill="#ff5f57"/><circle cx="52" cy="29" r="3" fill="#ffbd2e"/><circle cx="62" cy="29" r="3" fill="#28ca41"/>
+          <rect x="46" y="50" width="68" height="8" rx="3" fill="#e2e8f0"/>
+          <rect x="46" y="64" width="50" height="8" rx="3" fill="#e2e8f0"/>
+          <rect x="46" y="78" width="80" height="8" rx="3" fill="#e2e8f0"/>
+          <rect x="46" y="92" width="40" height="10" rx="4" fill="#2563EB"/>
+          <path d="M150 70 L165 58 L163 60 L165 58 L162 57" stroke="#E8380D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="165" cy="52" r="14" fill="#E8380D" opacity=".12"/>
+          <path d="M160 50 L165 46 L170 50 M165 46 V58" stroke="#E8380D" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="155" cy="110" r="12" fill="#E8380D" opacity=".08"/>
+          <path d="M151 110 l3 3 6-6" stroke="#E8380D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="135" y="48" width="28" height="14" rx="4" fill="#E8380D"/>
+          <text x="149" y="58" text-anchor="middle" fill="#fff" font-size="7" font-weight="700" font-family="sans-serif">AI</text>
+        </svg>
+      </div>
       <div class="s-card-body">
         <h3 class="s-card-title">AIがブラウザ操作</h3>
-        <p class="s-card-desc">経費精算システムを開いて、金額を入力して、勘定科目を選んで、申請ボタンを押す。この操作をAIが全自動で実行する。あなたは見ているだけ。</p>
+        <p class="s-card-desc">経費精算の申請、求人サイトへの掲載、勤怠の打刻修正——。ブラウザ上のあらゆる定型作業を、AIが人間の代わりに操作して完了させる。ログイン、入力、クリック、送信。あなたはもう手を動かさなくていい。</p>
       </div>
       <div class="s-card-result">
-        <span class="s-before"><s>経費申請 1件5分</s></span>
+        <span class="s-before"><s>定型のPC作業</s></span>
         <span class="s-arrow">→→</span>
-        <span class="s-after"><strong>完全自動</strong></span>
+        <span class="s-after"><strong>AIが全自動</strong>で完了</span>
       </div>
     </div>
     <div class="s-card fade-in">
-      <img class="s-card-img" src="images/carousel-2.png" alt="動画編集の自動化">
+      <div class="s-card-illust">
+        <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="35" y="22" width="130" height="80" rx="8" fill="#1e1e2e"/>
+          <rect x="45" y="34" width="76" height="48" rx="4" fill="#2d2d44"/>
+          <polygon points="76,52 76,66 88,59" fill="#fff" opacity=".8"/>
+          <rect x="45" y="88" width="76" height="6" rx="2" fill="#3d3d55"/>
+          <rect x="45" y="88" width="28" height="6" rx="2" fill="#7c3aed"/>
+          <rect x="130" y="34" width="28" height="10" rx="3" fill="#7c3aed" opacity=".2"/>
+          <text x="144" y="42" text-anchor="middle" fill="#7c3aed" font-size="7" font-weight="700" font-family="sans-serif">AI</text>
+          <rect x="130" y="48" width="28" height="6" rx="2" fill="#f59e0b" opacity=".5"/>
+          <rect x="130" y="58" width="28" height="6" rx="2" fill="#f59e0b" opacity=".5"/>
+          <rect x="130" y="68" width="28" height="6" rx="2" fill="#10b981" opacity=".5"/>
+          <text x="144" y="53" fill="#f59e0b" font-size="5" font-family="sans-serif">テロップ</text>
+          <text x="144" y="63" fill="#f59e0b" font-size="5" font-family="sans-serif">テロップ</text>
+          <text x="144" y="73" fill="#10b981" font-size="5" font-family="sans-serif">BGM</text>
+          <rect x="35" y="105" width="130" height="16" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+          <rect x="42" y="109" width="20" height="3" rx="1" fill="#7c3aed"/><rect x="65" y="109" width="30" height="3" rx="1" fill="#6d28d9"/><rect x="98" y="109" width="15" height="3" rx="1" fill="#8b5cf6"/><rect x="116" y="109" width="22" height="3" rx="1" fill="#7c3aed"/>
+          <rect x="42" y="114" width="18" height="3" rx="1" fill="#f59e0b" opacity=".6"/><rect x="72" y="114" width="14" height="3" rx="1" fill="#f59e0b" opacity=".6"/><rect x="100" y="114" width="20" height="3" rx="1" fill="#f59e0b" opacity=".6"/>
+          <path d="M42 119 Q55 116 68 119 Q80 122 92 119 Q105 116 118 119 Q130 122 138 119" stroke="#10b981" stroke-width="1.5" fill="none" opacity=".5"/>
+        </svg>
+      </div>
       <div class="s-card-body">
         <h3 class="s-card-title">動画編集の自動化</h3>
-        <p class="s-card-desc">素材動画を渡して「テロップとBGMつけて」と伝えるだけ。カット、テロップ挿入、BGM、書き出しまでAIが処理する。</p>
+        <p class="s-card-desc">YouTube動画、社内研修用の教材、SNSのリール動画——。AIが映像を分析してカットし、構成を組み、テロップを入れ、BGMまで選ぶ。プロの編集者に依頼していたレベルの動画が、指示を出すだけで仕上がる。</p>
       </div>
       <div class="s-card-result">
-        <span class="s-before"><s>動画編集 1本3時間</s></span>
+        <span class="s-before"><s>動画制作</s></span>
         <span class="s-arrow">→→</span>
-        <span class="s-after"><strong>15</strong>分</span>
+        <span class="s-after"><strong>プロ品質</strong>がAIで完成</span>
       </div>
     </div>
     <div class="s-card fade-in">
-      <img class="s-card-img" src="images/carousel-3.png" alt="独自アプリ開発">
+      <div class="s-card-illust">
+        <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="55" y="18" width="90" height="65" rx="6" fill="#fff" stroke="#2563EB" stroke-width="2"/>
+          <rect x="62" y="28" width="76" height="6" rx="2" fill="#2563EB" opacity=".15"/>
+          <rect x="62" y="38" width="76" height="4" rx="1.5" fill="#e2e8f0"/>
+          <rect x="62" y="46" width="76" height="4" rx="1.5" fill="#e2e8f0"/>
+          <rect x="62" y="54" width="76" height="4" rx="1.5" fill="#e2e8f0"/>
+          <rect x="62" y="62" width="76" height="4" rx="1.5" fill="#e2e8f0"/>
+          <rect x="62" y="70" width="40" height="4" rx="1.5" fill="#e2e8f0"/>
+          <circle cx="132" cy="40" r="4" fill="#16a34a" opacity=".6"/><circle cx="132" cy="48" r="4" fill="#f59e0b" opacity=".6"/><circle cx="132" cy="56" r="4" fill="#2563EB" opacity=".6"/>
+          <rect x="30" y="50" width="30" height="50" rx="4" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="35" y="55" width="20" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="35" y="61" width="20" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="35" y="67" width="20" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="37" y="85" width="16" height="10" rx="3" fill="#2563EB" opacity=".15"/>
+          <circle cx="45" cy="76" r="5" fill="#2563EB" opacity=".1"/>
+          <g transform="translate(140,85)">
+            <rect x="0" y="0" width="36" height="36" rx="6" fill="#fee2e2"/>
+            <text x="18" y="14" text-anchor="middle" fill="#E8380D" font-size="8" font-family="monospace" font-weight="700">&lt;/&gt;</text>
+            <line x1="8" y1="20" x2="28" y2="20" stroke="#E8380D" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="12" y1="16" x2="24" y2="24" stroke="#E8380D" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="24" y1="16" x2="12" y2="24" stroke="#E8380D" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <text x="158" y="132" text-anchor="middle" fill="#E8380D" font-size="6" font-weight="600" font-family="sans-serif">コード不要</text>
+        </svg>
+      </div>
       <div class="s-card-body">
         <h3 class="s-card-title">独自アプリ開発</h3>
-        <p class="s-card-desc">「営業リスト管理アプリが欲しい」とAIに伝えるだけ。検索、フィルター、ステータス管理を備えたWebアプリが、コードを1行も書かずに完成する。</p>
+        <p class="s-card-desc">顧客管理、在庫管理、日報システム、予約フォーム——。「こういうのが欲しい」とAIに伝えるだけで、検索もフィルターもグラフもついた本格Webアプリが完成する。プログラミング経験は不要。コードは1行も書かない。</p>
       </div>
       <div class="s-card-result">
-        <span class="s-before"><s>アプリ開発 外注で数十万円</s></span>
+        <span class="s-before"><s>アプリ開発</s></span>
         <span class="s-arrow">→→</span>
-        <span class="s-after"><strong>自分で作れる</strong></span>
+        <span class="s-after"><strong>コードなし</strong>で自分で作れる</span>
       </div>
     </div>
     <div class="s-card fade-in">
-      <img class="s-card-img" src="images/carousel-4.png" alt="外出先からPC操作">
+      <div class="s-card-illust">
+        <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="20" width="50" height="90" rx="8" fill="#fff" stroke="#1e293b" stroke-width="2.5"/>
+          <rect x="30" y="20" width="50" height="12" rx="8" fill="#1e293b"/>
+          <rect x="48" y="22" width="14" height="8" rx="4" fill="#1e293b"/>
+          <rect x="36" y="38" width="38" height="6" rx="2" fill="#dcf8c6"/>
+          <rect x="36" y="48" width="34" height="6" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width=".5"/>
+          <rect x="36" y="58" width="30" height="6" rx="2" fill="#fff" stroke="#e2e8f0" stroke-width=".5"/>
+          <rect x="36" y="68" width="38" height="6" rx="2" fill="#dcf8c6"/>
+          <circle cx="38" cy="82" r="3" fill="#25d366"/>
+          <rect x="36" y="86" width="38" height="12" rx="4" fill="#075e54"/>
+          <text x="55" y="94" text-anchor="middle" fill="#fff" font-size="6" font-family="sans-serif">送信</text>
+          <path d="M90 65 Q105 55 120 65" stroke="#E8380D" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
+          <path d="M115 62 L120 65 L115 68" stroke="#E8380D" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <g transform="translate(95,42)">
+            <path d="M0 8 Q5 0 10 8 Q15 0 20 8" stroke="#E8380D" stroke-width="1.5" fill="none" opacity=".5"/>
+            <path d="M2 14 Q7 6 12 14 Q17 6 22 14" stroke="#E8380D" stroke-width="1.5" fill="none" opacity=".35"/>
+            <path d="M4 20 Q9 12 14 20 Q19 12 24 20" stroke="#E8380D" stroke-width="1.5" fill="none" opacity=".2"/>
+          </g>
+          <rect x="125" y="30" width="50" height="35" rx="4" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+          <rect x="125" y="30" width="50" height="8" rx="4" fill="#f1f3f4"/>
+          <circle cx="131" cy="34" r="2" fill="#ff5f57"/><circle cx="137" cy="34" r="2" fill="#ffbd2e"/><circle cx="143" cy="34" r="2" fill="#28ca41"/>
+          <rect x="130" y="42" width="40" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="130" y="48" width="30" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="130" y="54" width="35" height="3" rx="1" fill="#2563EB" opacity=".3"/>
+          <rect x="125" y="72" width="50" height="35" rx="4" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+          <rect x="130" y="78" width="40" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="130" y="84" width="30" height="3" rx="1" fill="#e2e8f0"/>
+          <rect x="130" y="90" width="24" height="8" rx="3" fill="#16a34a" opacity=".15"/>
+          <text x="142" y="96" text-anchor="middle" fill="#16a34a" font-size="6" font-weight="600" font-family="sans-serif">送信済</text>
+        </svg>
+      </div>
       <div class="s-card-body">
         <h3 class="s-card-title">外出先からPC操作</h3>
-        <p class="s-card-desc">スマホからAIに「さっきの資料を部長にメールして」と指示すると、オフィスのPCを遠隔操作してメール送信まで完了する。</p>
+        <p class="s-card-desc">「あの資料を上司にメールしておいて。」「見積書のPDFを印刷しておいて。」出先のスマホからAIに指示するだけで、オフィスのPCが動き出す。ファイル操作、メール送信、ソフトの起動——まるで自分がデスクに座っているかのように。</p>
       </div>
       <div class="s-card-result">
-        <span class="s-before"><s>急な対応 帰社が必要</s></span>
+        <span class="s-before"><s>急な対応</s></span>
         <span class="s-arrow">→→</span>
-        <span class="s-after"><strong>その場で完了</strong></span>
+        <span class="s-after">外出先から<strong>その場で完了</strong></span>
       </div>
     </div>
     <div class="s-card fade-in">
-      <img class="s-card-img" src="images/carousel-5.png" alt="AIがデスクトップアプリを操作">
+      <div class="s-card-illust">
+        <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="22" y="35" width="38" height="38" rx="6" fill="#217346" opacity=".12"/>
+          <text x="41" y="60" text-anchor="middle" fill="#217346" font-size="18" font-weight="900" font-family="sans-serif">X</text>
+          <rect x="68" y="35" width="38" height="38" rx="6" fill="#D24726" opacity=".12"/>
+          <text x="87" y="60" text-anchor="middle" fill="#D24726" font-size="18" font-weight="900" font-family="sans-serif">P</text>
+          <rect x="114" y="35" width="38" height="38" rx="6" fill="#2B579A" opacity=".12"/>
+          <text x="133" y="60" text-anchor="middle" fill="#2B579A" font-size="18" font-weight="900" font-family="sans-serif">W</text>
+          <rect x="68" y="80" width="38" height="38" rx="6" fill="#7B83EB" opacity=".12"/>
+          <text x="87" y="105" text-anchor="middle" fill="#7B83EB" font-size="14" font-weight="700" font-family="sans-serif">CRM</text>
+          <circle cx="168" cy="70" r="24" fill="#E8380D" opacity=".1"/>
+          <circle cx="168" cy="70" r="16" fill="#E8380D" opacity=".15"/>
+          <text x="168" y="67" text-anchor="middle" fill="#E8380D" font-size="9" font-weight="900" font-family="sans-serif">AI</text>
+          <text x="168" y="77" text-anchor="middle" fill="#E8380D" font-size="5" font-family="sans-serif">操作中</text>
+          <path d="M152 62 L140 56" stroke="#E8380D" stroke-width="1.5" stroke-dasharray="3 2" opacity=".5"/>
+          <path d="M152 70 L106 54" stroke="#E8380D" stroke-width="1.5" stroke-dasharray="3 2" opacity=".5"/>
+          <path d="M155 80 L106 90" stroke="#E8380D" stroke-width="1.5" stroke-dasharray="3 2" opacity=".5"/>
+          <path d="M152 65 L60 54" stroke="#E8380D" stroke-width="1.5" stroke-dasharray="3 2" opacity=".4"/>
+        </svg>
+      </div>
       <div class="s-card-body">
         <h3 class="s-card-title">AIがデスクトップアプリを操作</h3>
-        <p class="s-card-desc">「売上データからエリア別月次レポート作って。グラフも。」AIがExcelを開き、データを集計し、グラフ付きレポートを完成させる。</p>
+        <p class="s-card-desc">Excel、PowerPoint、Word、会計ソフト、CRM——。これまで手作業でやっていたPC上のあらゆるソフト操作を、AIが代行する。データ集計、グラフ作成、レポート出力、ファイル整理。あなたの「作業時間」が消える。</p>
       </div>
       <div class="s-card-result">
-        <span class="s-before"><s>レポート作成 半日</s></span>
+        <span class="s-before"><s>PC上の手作業</s></span>
         <span class="s-arrow">→→</span>
-        <span class="s-after"><strong>1</strong>分</span>
+        <span class="s-after"><strong>AIが全部代行</strong></span>
       </div>
     </div>
   </div>
