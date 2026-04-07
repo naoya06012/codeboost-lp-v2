@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CodeBoost - AI学習プログラム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel: PIXEL_ID_HERE を実際のピクセルIDに差し替えてください -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'PIXEL_ID_HERE');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID_HERE&ev=PageView&noscript=1"/></noscript>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;color:#222;background:#FFF;max-width:375px;margin:0 auto;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.8}
+img{max-width:100%;height:auto;display:block}
+.accent{color:#E8380D}
+.block{padding:48px 20px}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@keyframes pulse-glow{
+  0%,100%{box-shadow:0 4px 18px rgba(6,199,85,.4)}
+  50%{box-shadow:0 4px 28px rgba(6,199,85,.72),0 0 0 6px rgba(6,199,85,.12)}
+}
+@keyframes arrow-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.cta-btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:20px 18px;background:linear-gradient(135deg,#06C755,#05b34c);color:#FFF;
+  font-size:15px;font-weight:700;letter-spacing:.02em;text-align:center;
+  text-decoration:none;border:none;border-radius:14px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(6,199,85,.4);
+  animation:pulse-glow 2.6s ease-in-out infinite;
+  transition:opacity .2s;line-height:1.4;
+  text-shadow:0 1px 3px rgba(0,0,0,.18);
+  position:relative;overflow:hidden;
+}
+.cta-btn::after{
+  content:'';position:absolute;top:0;left:-200%;width:200%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+  animation:shimmer 3s ease-in-out infinite;
+}
+.cta-btn:active{opacity:.85}
+.cta-btn .line-svg{flex-shrink:0;width:22px;height:22px;position:relative;z-index:1}
+.cta-sub{font-size:11px;color:#999;margin-top:10px;text-align:center}
+
+/* ===== Section label (reusable) ===== */
+.section-label{
+  font-size:11px;font-weight:700;color:#E8380D;letter-spacing:.12em;margin-bottom:10px;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.section-label::before{content:'';width:20px;height:2px;background:#E8380D;display:inline-block}
+.section-heading{font-size:20px;font-weight:900;line-height:1.6;margin-bottom:14px}
+.section-sub{font-size:14px;color:#555;line-height:1.85;margin-bottom:24px}
+
+/* ===== Block 1: FV ===== */
+.fv{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#0a1628 0%,#132240 100%);
+  padding:0 0 36px;
+}
+.fv-hero-wrap{
+  position:relative;width:100%;height:480px;overflow:hidden;
+  margin-bottom:-300px;
+}
+.fv-hero-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.fv-hero-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,
+    rgba(10,22,40,0) 0%,
+    rgba(10,22,40,.15) 25%,
+    rgba(10,22,40,.55) 45%,
+    rgba(10,22,40,.85) 65%,
+    rgba(10,22,40,1) 100%
+  );
+}
+.fv-hero-wrap::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:url('assets/fv-bg-v2.png') center/cover no-repeat;
+  opacity:.2;mix-blend-mode:screen;
+}
+/* Geometric decoration */
+.fv-geo{
+  position:absolute;top:60px;right:-40px;width:200px;height:200px;z-index:1;
+  border:2px solid rgba(232,56,13,.15);border-radius:50%;
+  animation:float 6s ease-in-out infinite;
+}
+.fv-geo2{
+  position:absolute;top:180px;right:20px;width:80px;height:80px;z-index:1;
+  border:2px solid rgba(6,199,85,.15);border-radius:50%;
+  animation:float 4s ease-in-out infinite 1s;
+}
+.fv-content{position:relative;z-index:2;padding:0 20px}
+.fv-logo{position:absolute;top:16px;left:20px;z-index:3}
+.fv-logo img{height:28px;width:auto;filter:brightness(1.2) drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.fv-accent-bar{width:40px;height:3px;background:linear-gradient(90deg,#FF6B35,#FF9F1C);border-radius:2px;margin-bottom:20px;box-shadow:0 0 8px rgba(255,107,53,.4)}
+.fv-main{font-size:30px;font-weight:900;line-height:1.5;letter-spacing:-.02em;margin-bottom:18px;color:#FFF;text-shadow:0 2px 12px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.3)}
+.fv-main .accent{color:#FF6B35;text-shadow:0 0 24px rgba(255,107,53,.5),0 2px 8px rgba(0,0,0,.4)}
+.fv-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.9;margin-bottom:24px;font-weight:400}
+.tags{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tag{
+  font-size:11px;font-weight:700;color:#FFF;
+  border:1.5px solid rgba(255,107,53,.5);border-radius:100px;
+  padding:5px 14px;white-space:nowrap;
+  background:rgba(255,107,53,.15);
+  backdrop-filter:blur(4px);
+}
+
+/* ===== Block 2: Surprise ===== */
+.surprise{
+  background:linear-gradient(180deg,#0a1628 0%,#0f1d35 60%,#FFF 60%);
+  padding:48px 0 44px;
+  position:relative;
+}
+.surprise-heading{
+  font-size:20px;font-weight:900;line-height:1.6;text-align:center;
+  padding:0 20px;margin-bottom:6px;color:#FFF;
+}
+.surprise-heading .accent{
+  background:linear-gradient(90deg,#E8380D,#ff6b3d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.surprise-sub{font-size:12px;color:rgba(255,255,255,.5);text-align:center;margin-bottom:24px;padding:0 20px}
+.s-carousel{
+  display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:0 20px 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.s-carousel::-webkit-scrollbar{display:none}
+.s-card{
+  flex:0 0 85%;scroll-snap-align:center;background:#FFF;border-radius:16px;
+  overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,.12);
+  border:1px solid rgba(0,0,0,.04);
+}
+.s-card-img{width:100%;height:auto;object-fit:cover;border-radius:8px 8px 0 0}
+.s-card-placeholder{
+  width:100%;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#e8eaed;color:#999;font-size:12px;text-align:center;padding:16px;line-height:1.6;gap:6px;
+}
+.s-card-placeholder span{font-weight:700;font-size:13px;color:#777}
+.s-card-body{padding:18px 18px 10px}
+.s-card-title{font-size:15px;font-weight:700;line-height:1.55;margin-bottom:8px}
+.s-card-desc{font-size:13px;color:#555;line-height:1.8}
+.s-card-result{
+  border-top:1px solid #f0f0f0;margin:14px 18px 0;padding:14px 0 16px;
+  display:flex;align-items:center;gap:8px;
+  background:linear-gradient(90deg,rgba(232,56,13,.03),rgba(232,56,13,.06));
+  margin:0;padding:14px 18px 16px;
+}
+.s-before{font-size:13px;color:#999;flex:1}
+.s-before s{text-decoration:line-through}
+.s-arrow{color:#E8380D;font-weight:900;flex-shrink:0;font-size:18px;letter-spacing:-2px}
+.s-after{font-size:13px;color:#222;font-weight:700;flex:1;text-align:right}
+.s-after strong{font-size:24px;color:#E8380D;font-weight:900}
+.s-dots{display:flex;justify-content:center;gap:6px;margin-top:16px}
+.s-dot{width:6px;height:6px;border-radius:50%;background:#ddd;transition:background .3s}
+.s-dot.active{background:#E8380D}
+.s-note{font-size:11px;color:#bbb;text-align:center;margin-top:8px;padding:0 20px}
+
+/* CTA between sections */
+.section-cta{padding:32px 20px;text-align:center;background:#FFF}
+.section-cta-dark{background:linear-gradient(180deg,#0f1d35 0%,#132240 100%);padding:24px 20px 36px}
+.section-cta-bg{background:#f8f9fb}
+
+/* ===== Block 3: Pain ===== */
+.pain{
+  background:linear-gradient(135deg,#1a2a44 0%,#0f1d35 50%,#1a2a44 100%);
+  padding:48px 20px;color:#fff;
+  position:relative;overflow:hidden;
+}
+.pain::before{
+  content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(232,56,13,.08) 0%,transparent 70%);
+  border-radius:50%;
+}
+.pain-heading{font-size:18px;font-weight:900;text-align:center;margin-bottom:28px;color:#fff;line-height:1.65}
+.pain-list{list-style:none}
+.pain-item{
+  display:flex;align-items:flex-start;gap:13px;font-size:14px;line-height:1.9;
+  margin-bottom:10px;color:rgba(255,255,255,.85);
+  background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border-radius:12px;padding:14px 16px;
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(4px);
+}
+.pain-item:last-child{margin-bottom:0}
+.pain-check{
+  flex-shrink:0;width:22px;height:22px;
+  background:linear-gradient(135deg,#E8380D,#ff6b3d);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:3px;
+  box-shadow:0 2px 8px rgba(232,56,13,.3);
+}
+.pain-check::after{content:'\2713';color:#FFF;font-size:12px;font-weight:700}
+.pain-accent{color:#ff8c6b;font-weight:700}
+
+/* ===== Block 4: Bridge ===== */
+.bridge{
+  background:linear-gradient(180deg,#FFF 0%,#fff8f6 100%);
+  text-align:center;padding:48px 20px 28px;
+  position:relative;
+}
+.bridge::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,#E8380D,#ff6b3d,#E8380D);
+}
+.bridge-arrow{font-size:26px;color:#E8380D;margin-bottom:22px;display:block;animation:arrow-bounce 1.6s ease-in-out infinite;opacity:.7}
+.bridge-text{font-size:20px;font-weight:900;line-height:1.8;margin-bottom:14px}
+.hl{
+  background:linear-gradient(transparent 60%,rgba(232,56,13,.18) 60%);
+  padding-bottom:2px;
+}
+.bridge-hint{font-size:13px;color:#888;line-height:1.9}
+
+/* ===== Block 5: Service ===== */
+.service{
+  background:linear-gradient(180deg,#f8f9fb 0%,#eef0f4 100%);
+  padding:48px 20px;
+}
+.service-why{margin-bottom:32px}
+/* Compare diagram */
+.sw-compare{
+  display:flex;gap:10px;margin-bottom:16px;
+}
+.sw-compare-card{
+  flex:1;background:#FFF;border-radius:12px;padding:16px 12px;text-align:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid #eee;
+}
+.sw-compare-icon-img{width:56px;height:56px;border-radius:12px;object-fit:cover;margin:0 auto 8px;display:block}
+.sw-other{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  background:#FFF;border-radius:12px;padding:14px 16px;margin-bottom:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid #eee;text-align:center;
+}
+.sw-other-icon{width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.sw-other-text{font-size:12px;color:#555;line-height:1.65}
+.sw-other-text strong{color:#E8380D;font-size:13px}
+.sw-compare-role{font-size:13px;font-weight:900;margin-bottom:8px;color:#222}
+.sw-compare-list{list-style:none;text-align:left}
+.sw-compare-list li{font-size:11px;color:#555;line-height:1.6;padding:3px 0;display:flex;align-items:center;gap:5px}
+.sw-compare-list li::before{content:'';width:4px;height:4px;background:#E8380D;border-radius:50%;flex-shrink:0}
+.sw-compare-ne{
+  font-size:13px;font-weight:700;text-align:center;color:#E8380D;
+  margin-bottom:16px;line-height:1.7;
+}
+/* Flow diagram */
+.sw-flow{
+  background:#FFF;border-radius:14px;padding:20px 16px;
+  box-shadow:0 2px 16px rgba(0,0,0,.06);
+}
+.sw-flow-title{font-size:13px;font-weight:900;text-align:center;margin-bottom:16px;color:#222}
+.sw-flow-steps{display:flex;flex-direction:column;gap:0}
+.sw-flow-step{display:flex;align-items:flex-start;gap:12px}
+.sw-flow-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:36px}
+.sw-flow-num{
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:#FFF;
+  background:linear-gradient(135deg,#E8380D,#ff6b3d);
+  box-shadow:0 2px 8px rgba(232,56,13,.25);
+  flex-shrink:0;
+}
+.sw-flow-line{width:2px;flex:1;min-height:16px;background:linear-gradient(180deg,#E8380D,#eee);margin:4px 0}
+.sw-flow-body{padding:6px 0 20px}
+.sw-flow-label{font-size:14px;font-weight:700;color:#222;margin-bottom:2px;line-height:1.5}
+.sw-flow-desc{font-size:12px;color:#777;line-height:1.7}
+.sw-flow-step:last-child .sw-flow-body{padding-bottom:0}
+.sw-flow-step:last-child .sw-flow-line{display:none}
+.sw-flow-result{
+  margin-top:16px;padding:14px;border-radius:10px;text-align:center;
+  background:linear-gradient(135deg,#fff5f2,#fff0eb);
+  border:1.5px solid rgba(232,56,13,.2);
+}
+.sw-flow-result-text{font-size:14px;font-weight:900;color:#E8380D;line-height:1.6}
+
+/* Pillar cards */
+.pillar-card{
+  background:#FFF;border-radius:16px;overflow:hidden;margin-bottom:16px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  border:none;
+  transition:transform .3s;
+}
+.pillar-card:last-of-type{margin-bottom:0}
+.pillar-card-img{width:100%;height:180px;object-fit:cover}
+.pillar-card-body{padding:20px}
+.pillar-num-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;color:#FFF;
+  background:linear-gradient(135deg,#E8380D,#ff6b3d);
+  border-radius:8px;padding:4px 12px;margin-bottom:10px;letter-spacing:.05em;
+  box-shadow:0 2px 8px rgba(232,56,13,.25);
+}
+.pillar-title{font-size:16px;font-weight:900;margin-bottom:8px;line-height:1.5}
+.pillar-desc{font-size:13px;color:#555;line-height:1.85}
+
+/* Job tabs */
+.job-section{
+  margin-top:36px;background:#FFF;border-radius:16px;padding:24px 20px;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+.job-heading{font-size:16px;font-weight:900;text-align:center;margin-bottom:8px;line-height:1.6}
+.job-sub{font-size:12px;color:#888;text-align:center;margin-bottom:20px}
+.job-tabs{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.job-tabs::-webkit-scrollbar{display:none}
+.job-tab{
+  flex-shrink:0;font-size:12px;font-weight:700;color:#888;
+  background:#f8f9fb;border:1.5px solid #eee;border-radius:100px;
+  padding:8px 16px;cursor:pointer;transition:all .25s;white-space:nowrap;
+}
+.job-tab.active{color:#FFF;background:linear-gradient(135deg,#E8380D,#ff6b3d);border-color:#E8380D;box-shadow:0 2px 8px rgba(232,56,13,.25)}
+.job-panel{display:none}
+.job-panel.active{display:block}
+.job-persona{
+  display:inline-block;font-size:11px;font-weight:700;color:#888;
+  background:#f0f2f5;border-radius:100px;padding:4px 12px;margin-bottom:16px;
+}
+.job-steps{display:flex;flex-direction:column;gap:0}
+.job-step{display:flex;align-items:flex-start;gap:12px}
+.job-step-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:32px}
+.job-step-num{
+  width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#FFF;
+  background:linear-gradient(135deg,#E8380D,#ff6b3d);
+  box-shadow:0 2px 8px rgba(232,56,13,.2);
+  flex-shrink:0;
+}
+.job-step-line{width:2px;flex:1;min-height:12px;background:linear-gradient(180deg,#E8380D,#eee);margin:4px 0}
+.job-step-body{padding:4px 0 18px}
+.job-step-label{font-size:13px;font-weight:700;color:#222;margin-bottom:4px;line-height:1.5}
+.job-step-label .evolve{color:#E8380D;background:linear-gradient(transparent 60%,rgba(232,56,13,.12) 60%);padding-bottom:1px}
+.job-step-desc{font-size:12px;color:#777;line-height:1.75}
+.job-step:last-child .job-step-body{padding-bottom:0}
+.job-step:last-child .job-step-line{display:none}
+.job-step-goal{
+  background:linear-gradient(135deg,#fff5f2,#fff0eb);
+  border:1.5px solid rgba(232,56,13,.2);
+  border-radius:12px;padding:14px 12px 14px 12px;margin-top:4px;
+}
+.job-step-goal .job-step-body{padding-bottom:0}
+.job-step-num-goal{
+  background:linear-gradient(135deg,#E8380D,#c42800);
+  box-shadow:0 2px 12px rgba(232,56,13,.35);
+}
+.sw-compare-msg{font-size:12px;color:#555;line-height:1.7;margin-top:4px;word-break:keep-all}
+
+/* ===== Block 6: Testimonials ===== */
+.testimonials{background:linear-gradient(180deg,#FFF 0%,#f8f9fb 100%);padding:48px 20px}
+.testi-heading{font-size:20px;font-weight:900;line-height:1.6;text-align:center;margin-bottom:28px}
+.testi-card{
+  background:#FFF;border-radius:16px;overflow:hidden;margin-bottom:20px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  border:none;
+  position:relative;
+}
+.testi-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,#E8380D,#ff6b3d);
+}
+.testi-header{display:flex;align-items:center;gap:14px;padding:24px 20px 16px}
+.testi-avatar{
+  width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:3px solid #fff;box-shadow:0 2px 12px rgba(232,56,13,.15);
+}
+.testi-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-name{font-size:15px;font-weight:700;line-height:1.4}
+.testi-meta{font-size:11px;color:#888}
+.testi-ba{display:flex;gap:8px;padding:0 20px;margin-bottom:16px}
+.testi-ba-item{flex:1;padding:12px;border-radius:10px;font-size:12px;line-height:1.65}
+.testi-ba-before{background:#f0f2f5;color:#777}
+.testi-ba-after{background:linear-gradient(135deg,#e3f5ec,#d4f0e3);color:#1a7a5a;font-weight:700}
+.testi-ba-label{font-size:10px;font-weight:700;letter-spacing:.06em;display:block;margin-bottom:4px;opacity:.7}
+.testi-quote{
+  font-size:13px;color:#444;line-height:1.9;padding:16px 20px 20px;
+  background:#f8f9fb;margin:0 12px 12px;border-radius:12px;
+  position:relative;border:none;
+}
+.testi-quote::before{content:'\201C';font-size:48px;color:#E8380D;opacity:.15;position:absolute;top:0;left:14px;line-height:1;font-family:Georgia,serif}
+.testi-note{font-size:11px;color:#bbb;text-align:center;margin-top:12px}
+
+/* ===== Block 7: Mid CTA ===== */
+.mid-cta{
+  background:linear-gradient(135deg,#0f1d35 0%,#1a2a44 100%);
+  text-align:center;padding:48px 20px;
+  position:relative;overflow:hidden;
+}
+.mid-cta::before{
+  content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(6,199,85,.1) 0%,transparent 70%);border-radius:50%;
+}
+.mid-cta-heading{font-size:18px;font-weight:900;line-height:1.65;margin-bottom:10px;color:#FFF}
+.mid-cta-heading .accent{
+  background:linear-gradient(90deg,#ff6b3d,#E8380D);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.mid-cta-sub{font-size:14px;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:24px}
+.mid-cta .cta-sub{color:rgba(255,255,255,.35)}
+
+/* ===== Block 8: Differentiation ===== */
+.diff{background:#FFF;padding:48px 20px}
+.diff-heading{font-size:20px;font-weight:900;line-height:1.6;margin-bottom:28px;text-align:center}
+.diff-card{border-radius:14px;padding:22px 18px;margin-bottom:14px;position:relative}
+.diff-card:last-child{margin-bottom:0}
+.diff-label{font-size:11px;font-weight:700;letter-spacing:.06em;margin-bottom:8px;display:block}
+.diff-title{font-size:15px;font-weight:900;margin-bottom:8px;line-height:1.5}
+.diff-text{font-size:13px;line-height:1.85}
+.diff-gray{background:#f3f4f6;border:1px solid #eee;color:#888}
+.diff-gray .diff-label{color:#bbb}
+.diff-gray .diff-title{color:#777}
+.diff-highlight{
+  background:linear-gradient(135deg,#fff5f2,#fff0eb);
+  border:2px solid #E8380D;color:#333;
+  box-shadow:0 4px 20px rgba(232,56,13,.1);
+  position:relative;
+}
+.diff-highlight::before{
+  content:'RECOMMENDED';position:absolute;top:-10px;right:16px;
+  font-size:9px;font-weight:900;color:#FFF;letter-spacing:.08em;
+  background:linear-gradient(135deg,#E8380D,#ff6b3d);
+  padding:3px 10px;border-radius:4px;
+  box-shadow:0 2px 8px rgba(232,56,13,.25);
+}
+.diff-highlight .diff-label{color:#E8380D}
+.diff-highlight .diff-title{color:#222}
+
+/* ===== Block 9: Final CTA ===== */
+.final-cta{
+  background:linear-gradient(135deg,#0a1628 0%,#132240 50%,#1a2a44 100%);
+  text-align:center;padding:52px 20px 60px;color:#FFF;
+  position:relative;overflow:hidden;
+}
+.final-cta::before{
+  content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(232,56,13,.06) 0%,transparent 70%);border-radius:50%;
+}
+.final-cta::after{
+  content:'';position:absolute;bottom:-80px;left:-80px;width:250px;height:250px;
+  background:radial-gradient(circle,rgba(6,199,85,.06) 0%,transparent 70%);border-radius:50%;
+}
+.final-heading{font-size:20px;font-weight:900;line-height:1.6;margin-bottom:16px;color:#FFF;position:relative;z-index:1}
+.final-sub{font-size:14px;color:rgba(255,255,255,.6);line-height:2;margin-bottom:28px;text-align:left;position:relative;z-index:1}
+.final-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+  border:1.5px solid rgba(6,199,85,.3);border-radius:18px;
+  padding:24px 18px 20px;
+  box-shadow:0 4px 30px rgba(6,199,85,.1);
+  backdrop-filter:blur(8px);
+  position:relative;z-index:1;
+}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;
+  color:#06C755;background:rgba(6,199,85,.15);border-radius:100px;
+  padding:4px 12px;margin-bottom:14px;letter-spacing:.03em;
+}
+.trust-badge::before{content:'';width:6px;height:6px;background:#06C755;border-radius:50%;display:inline-block;animation:pulse-glow 2s infinite}
+.final-note{font-size:11px;color:rgba(255,255,255,.4);margin-top:14px;line-height:1.7}
+
+/* ===== Sticky CTA ===== */
+.sticky-cta{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:375px;max-width:100%;
+  padding:32px 20px 20px;padding-bottom:calc(20px + env(safe-area-inset-bottom));
+  background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(255,255,255,1) 30%);
+  z-index:100;opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.sticky-cta.show{opacity:1;pointer-events:auto}
+.sticky-cta .cta-btn{font-size:14px;padding:17px 14px}
+
+/* ===== Thanks ===== */
+#thanks-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center}
+#thanks-overlay.active{display:flex}
+.thanks-card{background:#FFF;border-radius:16px;padding:40px 32px;text-align:center;margin:0 24px;max-width:327px}
+.thanks-check{
+  width:56px;height:56px;background:linear-gradient(135deg,#06C755,#05b34c);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
+  box-shadow:0 4px 16px rgba(6,199,85,.3);
+}
+.thanks-check::after{content:'\2713';color:#FFF;font-size:28px;font-weight:700}
+.thanks-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.thanks-sub{font-size:13px;color:#666}
+.spacer{height:96px}
+
+/* ===== Community Section ===== */
+.community{
+  background:linear-gradient(180deg,#f0f7f2 0%,#e8f5ec 100%);
+  padding:48px 20px;
+}
+.community-heading{
+  font-size:20px;font-weight:900;line-height:1.6;text-align:center;margin-bottom:10px;
+}
+.community-lead{
+  font-size:14px;color:#555;line-height:1.9;margin-bottom:28px;text-align:center;
+}
+.community-card{
+  background:#FFF;border-radius:14px;padding:20px 18px;margin-bottom:14px;
+  box-shadow:0 2px 16px rgba(0,0,0,.06);
+  border-left:4px solid #2e9e5a;
+}
+.community-card:last-of-type{margin-bottom:0}
+.community-card-num{
+  display:inline-block;font-size:11px;font-weight:900;color:#FFF;
+  background:#2e9e5a;border-radius:6px;padding:3px 10px;margin-bottom:8px;
+}
+.community-card-title{font-size:15px;font-weight:900;margin-bottom:6px;line-height:1.5;color:#222}
+.community-card-desc{font-size:13px;color:#555;line-height:1.85}
+.community-highlight{
+  margin-top:24px;padding:18px;border-radius:12px;text-align:center;
+  background:linear-gradient(135deg,#e3f5ec,#d4f0e3);
+  border:1.5px solid rgba(46,158,90,.3);
+}
+.community-highlight-text{font-size:15px;font-weight:900;color:#222;line-height:1.7}
+.community-highlight-text .accent-green{color:#2e9e5a;font-size:18px}
+.community-note{font-size:12px;color:#999;text-align:center;margin-top:10px}
+
+/* ===== Wave divider ===== */
+.wave-divider{
+  width:100%;height:40px;position:relative;margin-top:-1px;
+}
+.wave-divider svg{display:block;width:100%;height:100%}
+</style>
+</head>
+<body>
+
+<!-- ===== Block 1: FV ===== -->
+<section class="fv" id="fv-section">
+  <div class="fv-logo">
+    <img src="assets/logo.png" alt="CodeBoost">
+  </div>
+  <div class="fv-geo"></div>
+  <div class="fv-geo2"></div>
+  <div class="fv-hero-wrap">
+    <img src="assets/fv-hero.jpg" alt="AIを活用するビジネスパーソン">
+  </div>
+  <div class="fv-content">
+    <div class="fv-accent-bar fade-in"></div>
+    <h1 class="fv-main fade-in" id="fv-main"></h1>
+    <p class="fv-sub fade-in" id="fv-sub"></p>
+    <div class="tags fade-in">
+      <span class="tag">完全パーソナライズ</span>
+      <span class="tag">専属コーチ付き</span>
+      <span class="tag">未経験OK</span>
+    </div>
+    <button class="cta-btn fade-in" id="fv-cta" onclick="handleCTA()">
+      <svg class="line-svg" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="#FFF" fill-opacity=".22"/><path d="M11 4C7.134 4 4 6.71 4 10.05c0 2.72 1.8 5.07 4.45 6.12l-.56 2.08 2.44-1.35c.21.03.43.05.67.05 3.866 0 7-2.71 7-6.05C18 6.71 14.866 4 11 4z" fill="#FFF"/></svg>
+      <span class="cta-text" style="position:relative;z-index:1">無料でAI活用レベルを診断する →</span>
+    </button>
+  </div>
+</section>
+
+<!-- ===== Block 2: Surprise Carousel ===== -->
+<section class="surprise">
+  <h2 class="surprise-heading fade-in">あなたはまだ知らない。<br><span class="accent">AIは、ここまでできる。</span></h2>
+  <p class="surprise-sub fade-in">横にスワイプして見てみてください</p>
+  <div class="s-carousel" id="s-carousel">
+    <div class="s-card fade-in">
+      <img class="s-card-img" src="images/carousel-1.png" alt="AIがブラウザ操作">
+      <div class="s-card-body">
+        <h3 class="s-card-title">AIがブラウザ操作</h3>
+        <p class="s-card-desc">経費精算システムを開いて、金額を入力して、勘定科目を選んで、申請ボタンを押す。この操作をAIが全自動で実行する。あなたは見ているだけ。</p>
+      </div>
+      <div class="s-card-result">
+        <span class="s-before"><s>経費申請 1件5分</s></span>
+        <span class="s-arrow">→→</span>
+        <span class="s-after"><strong>完全自動</strong></span>
+      </div>
+    </div>
+    <div class="s-card fade-in">
+      <img class="s-card-img" src="images/carousel-2.png" alt="動画編集の自動化">
+      <div class="s-card-body">
+        <h3 class="s-card-title">動画編集の自動化</h3>
+        <p class="s-card-desc">素材動画を渡して「テロップとBGMつけて」と伝えるだけ。カット、テロップ挿入、BGM、書き出しまでAIが処理する。</p>
+      </div>
+      <div class="s-card-result">
+        <span class="s-before"><s>動画編集 1本3時間</s></span>
+        <span class="s-arrow">→→</span>
+        <span class="s-after"><strong>15</strong>分</span>
+      </div>
+    </div>
+    <div class="s-card fade-in">
+      <img class="s-card-img" src="images/carousel-3.png" alt="独自アプリ開発">
+      <div class="s-card-body">
+        <h3 class="s-card-title">独自アプリ開発</h3>
+        <p class="s-card-desc">「営業リスト管理アプリが欲しい」とAIに伝えるだけ。検索、フィルター、ステータス管理を備えたWebアプリが、コードを1行も書かずに完成する。</p>
+      </div>
+      <div class="s-card-result">
+        <span class="s-before"><s>アプリ開発 外注で数十万円</s></span>
+        <span class="s-arrow">→→</span>
+        <span class="s-after"><strong>自分で作れる</strong></span>
+      </div>
+    </div>
+    <div class="s-card fade-in">
+      <img class="s-card-img" src="images/carousel-4.png" alt="外出先からPC操作">
+      <div class="s-card-body">
+        <h3 class="s-card-title">外出先からPC操作</h3>
+        <p class="s-card-desc">スマホからAIに「さっきの資料を部長にメールして」と指示すると、オフィスのPCを遠隔操作してメール送信まで完了する。</p>
+      </div>
+      <div class="s-card-result">
+        <span class="s-before"><s>急な対応 帰社が必要</s></span>
+        <span class="s-arrow">→→</span>
+        <span class="s-after"><strong>その場で完了</strong></span>
+      </div>
+    </div>
+    <div class="s-card fade-in">
+      <img class="s-card-img" src="images/carousel-5.png" alt="AIがデスクトップアプリを操作">
+      <div class="s-card-body">
+        <h3 class="s-card-title">AIがデスクトップアプリを操作</h3>
+        <p class="s-card-desc">「売上データからエリア別月次レポート作って。グラフも。」AIがExcelを開き、データを集計し、グラフ付きレポートを完成させる。</p>
+      </div>
+      <div class="s-card-result">
+        <span class="s-before"><s>レポート作成 半日</s></span>
+        <span class="s-arrow">→→</span>
+        <span class="s-after"><strong>1</strong>分</span>
+      </div>
+    </div>
+  </div>
+  <div class="s-dots" id="s-dots"><span class="s-dot active"></span><span class="s-dot"></span><span class="s-dot"></span><span class="s-dot"></span><span class="s-dot"></span></div>
+  <p class="s-note">※効果には個人差があります</p>
+</section>
+
+<!-- CTA -->
+<div class="section-cta section-cta-dark">
+  <button class="cta-btn fade-in" onclick="handleCTA()">
+    <svg class="line-svg" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="#FFF" fill-opacity=".22"/><path d="M11 4C7.134 4 4 6.71 4 10.05c0 2.72 1.8 5.07 4.45 6.12l-.56 2.08 2.44-1.35c.21.03.43.05.67.05 3.866 0 7-2.71 7-6.05C18 6.71 14.866 4 11 4z" fill="#FFF"/></svg>
+    <span class="cta-text" style="position:relative;z-index:1">無料でAI活用レベルを診断する →</span>
+  </button>
+  <p class="cta-sub" style="color:rgba(255,255,255,.35)">※無理な勧誘は一切ありません</p>
+</div>
+
+<!-- ===== Block 3: Pain ===== -->
+<section class="block pain">
+  <h2 class="pain-heading fade-in">でも実際は、<br>こんな状態じゃないですか？</h2>
+  <ul class="pain-list">
+    <li class="pain-item fade-in"><span class="pain-check"></span><span>ChatGPTは使ってるけど、<span class="pain-accent">正直これで十分なのか不安</span></span></li>
+    <li class="pain-item fade-in"><span class="pain-check"></span><span>新しいAIツールが次々出てくるけど、<span class="pain-accent">全く追えてない</span></span></li>
+    <li class="pain-item fade-in"><span class="pain-check"></span><span>YouTubeで勉強しようとしたけど、<span class="pain-accent">断片的で何からやればいいかわからない</span></span></li>
+    <li class="pain-item fade-in"><span class="pain-check"></span><span>このままだと<span class="pain-accent">周りに置いていかれる</span>焦りがある</span></li>
+  </ul>
+</section>
+
+<!-- ===== Block 4: Bridge ===== -->
+<section class="block bridge">
+  <span class="bridge-arrow fade-in">▼</span>
+  <p class="bridge-text fade-in">その焦りを、<br><span class="hl">「圧倒的な自信」</span>に変える<br>方法があります。</p>
+  <p class="bridge-hint fade-in">あなたの職種に合わせた、完全パーソナライズのAI学習プログラム。</p>
+</section>
+
+
+<!-- ===== Block 5: Service ===== -->
+<section class="block service">
+  <p class="section-label fade-in">CodeBoostとは</p>
+  <h2 class="section-heading fade-in">AIの最新情報と活用法を、<br><span class="accent">あなた専用のロードマップ</span>で学ぶ</h2>
+  <p class="section-sub fade-in">CodeBoostは、あなたの職種・業務に合わせて学ぶ内容を設計する、完全パーソナライズのAI学習プログラムです。</p>
+  <div class="service-why fade-in">
+    <div class="sw-compare">
+      <div class="sw-compare-card">
+        <img class="sw-compare-icon-img" src="assets/icon-sales.png" alt="営業職">
+        <p class="sw-compare-role">営業職</p>
+        <p class="sw-compare-msg">営業職のあなたには、<br>営業のためのAI学習を。</p>
+      </div>
+      <div class="sw-compare-card">
+        <img class="sw-compare-icon-img" src="assets/icon-marketing.png" alt="マーケ職">
+        <p class="sw-compare-role">マーケ職</p>
+        <p class="sw-compare-msg">マーケ職のあなたには、<br>マーケのためのAI学習を。</p>
+      </div>
+    </div>
+    <div class="sw-other">
+      <img class="sw-other-icon" src="assets/icon-diverse.png" alt="あらゆる職種">
+      <p class="sw-other-text">人事・総務・企画・経理...<br><strong>あらゆる職種に対応。</strong></p>
+    </div>
+    <p class="sw-compare-ne">学ぶべきAIは、職種によって<br>まったく違う。</p>
+    <div class="sw-flow">
+      <p class="sw-flow-title">だからCodeBoostはこう設計する</p>
+      <div class="sw-flow-steps">
+        <div class="sw-flow-step">
+          <div class="sw-flow-left"><span class="sw-flow-num">1</span><span class="sw-flow-line"></span></div>
+          <div class="sw-flow-body">
+            <p class="sw-flow-label">初回面談でヒアリング</p>
+            <p class="sw-flow-desc">あなたの職種・業務内容・目標を丁寧に聞き取り</p>
+          </div>
+        </div>
+        <div class="sw-flow-step">
+          <div class="sw-flow-left"><span class="sw-flow-num">2</span><span class="sw-flow-line"></span></div>
+          <div class="sw-flow-body">
+            <p class="sw-flow-label">専用カリキュラムを設計</p>
+            <p class="sw-flow-desc">あなたに不要なスキルは一切省き、最短ルートを構築</p>
+          </div>
+        </div>
+        <div class="sw-flow-step">
+          <div class="sw-flow-left"><span class="sw-flow-num">3</span></div>
+          <div class="sw-flow-body">
+            <p class="sw-flow-label">3ヶ月で成果が出るロードマップ</p>
+            <p class="sw-flow-desc">毎週の進捗確認で着実にゴールへ導く</p>
+          </div>
+        </div>
+      </div>
+      <div class="sw-flow-result">
+        <p class="sw-flow-result-text">あなただけの学習ルートが完成</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillar-card fade-in">
+    <img class="pillar-card-img" src="assets/pillar-01-news.jpg" alt="AI最新情報">
+    <div class="pillar-card-body">
+      <span class="pillar-num-badge">01</span>
+      <h3 class="pillar-title">毎週届くAI最新情報</h3>
+      <p class="pillar-desc">受講期間中、毎週プロが厳選した「今週のAIニュース3選」が届きます。読むだけで最前線をキャッチアップ。さらに「自分の業務にどう活かせるか」を毎週言語化する「気づきワーク」で、知識を実践に変える。</p>
+    </div>
+  </div>
+  <div class="pillar-card fade-in">
+    <img class="pillar-card-img" src="assets/pillar-02-skill.jpg" alt="AI活用スキル">
+    <div class="pillar-card-body">
+      <span class="pillar-num-badge">02</span>
+      <h3 class="pillar-title">あなたの業務に直結するAI活用スキル</h3>
+      <p class="pillar-desc">営業なら提案資料自動生成、マーケならレポート自動化、人事なら議事録自動化。あなたの「あの面倒な作業」を、受講中に実際にAIで変える。</p>
+    </div>
+  </div>
+  <div class="pillar-card fade-in">
+    <img class="pillar-card-img" src="assets/pillar-03-coach.jpg" alt="専属コーチ">
+    <div class="pillar-card-body">
+      <span class="pillar-num-badge">03</span>
+      <h3 class="pillar-title">専属コーチが、やり切るまで横にいる</h3>
+      <p class="pillar-desc">週1回の1on1面談で進捗確認と方向修正。つまずいたらすぐ軌道修正。スキルテストと成果物提出があるから、「なんとなく学んだ」で終わらない。サボりたくてもサボれない環境。</p>
+    </div>
+  </div>
+
+  <div class="job-section fade-in">
+    <p class="job-heading">あなたの職種では<span class="accent">こう学ぶ</span></p>
+    <p class="job-sub">初回面談で完全オリジナルのロードマップを設計</p>
+    <div class="job-tabs">
+      <span class="job-tab active" data-tab="sales">営業職の場合</span>
+      <span class="job-tab" data-tab="marketing">マーケ職の場合</span>
+      <span class="job-tab" data-tab="hr">人事・総務の場合</span>
+    </div>
+    <div class="job-panel active" id="panel-sales">
+      <span class="job-persona">例：IT企業・法人営業・30代</span>
+      <div class="job-steps">
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">1</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label">AIリテラシーを身につける</p>
+            <p class="job-step-desc">AIに的確な指示を出せるようになる。どのAIツールを、どの場面で、なぜ使うのかを自分の言葉で説明できる状態へ。</p>
+          </div>
+        </div>
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">2</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「調べる力」が進化する</span></p>
+            <p class="job-step-desc">市場・競合・顧客の情報を、AIを使って深く・速く・網羅的に掴めるようになる。情報収集の精度とスピードが、これまでとは別次元に変わる。</p>
+          </div>
+        </div>
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">3</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「伝える力」が進化する</span></p>
+            <p class="job-step-desc">提案資料、報告書、メール——あらゆるアウトプットの質とスピードが変わる。AIと対話しながら、自分だけでは辿り着けなかった切り口や構成を生み出せるようになる。</p>
+          </div>
+        </div>
+        <div class="job-step job-step-goal">
+          <div class="job-step-left"><span class="job-step-num job-step-num-goal">4</span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「仕組みを作る力」が手に入る</span></p>
+            <p class="job-step-desc">日報、議事録、リスト作成——繰り返し発生する業務を、AIで自動化する仕組みを自分で設計・構築できるようになる。作業者から、仕組みの設計者へ。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="job-panel" id="panel-marketing">
+      <span class="job-persona">例：広告代理店・マーケ部門・20代</span>
+      <div class="job-steps">
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">1</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label">AIリテラシーを身につける</p>
+            <p class="job-step-desc">AIツールの全体像を把握し、目的に応じて最適なツールを選べるようになる。「なんとなくChatGPT」から「目的別に使い分ける」へ。</p>
+          </div>
+        </div>
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">2</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「分析する力」が進化する</span></p>
+            <p class="job-step-desc">データの収集・整理・分析・レポーティングの全工程でAIを活用できるようになる。「データを見る人」から「データで意思決定を動かす人」へ。</p>
+          </div>
+        </div>
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">3</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「生み出す力」が進化する</span></p>
+            <p class="job-step-desc">コピー、企画書、コンテンツ——AIを使ったアウトプットの量産と品質管理ができるようになる。AIと人間の役割分担を設計し、クリエイティブの生産性を根本から変える。</p>
+          </div>
+        </div>
+        <div class="job-step job-step-goal">
+          <div class="job-step-left"><span class="job-step-num job-step-num-goal">4</span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「仕組みを作る力」が手に入る</span></p>
+            <p class="job-step-desc">レポート配信、競合モニタリング、コンテンツ制作フロー——属人的だったマーケ業務を、AIで回る仕組みに変えられるようになる。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="job-panel" id="panel-hr">
+      <span class="job-persona">例：メーカー・人事部・30代</span>
+      <div class="job-steps">
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">1</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label">AIリテラシーを身につける</p>
+            <p class="job-step-desc">AIを安全に・正しく業務に導入するための判断基準を持てるようになる。リスクを理解した上で、自信を持ってAIを活用できる状態へ。</p>
+          </div>
+        </div>
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">2</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「整理する力」が進化する</span></p>
+            <p class="job-step-desc">議事録、社内文書、規程類——膨大な情報をAIで構造化・検索可能にする力を身につける。「探す時間」がゼロに近づく。</p>
+          </div>
+        </div>
+        <div class="job-step">
+          <div class="job-step-left"><span class="job-step-num">3</span><span class="job-step-line"></span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「回す力」が進化する</span></p>
+            <p class="job-step-desc">経費処理、月次報告、採用スクリーニング——毎月・毎週繰り返す業務を、AIを組み込んだ仕組みで自動化できるようになる。</p>
+          </div>
+        </div>
+        <div class="job-step job-step-goal">
+          <div class="job-step-left"><span class="job-step-num job-step-num-goal">4</span></div>
+          <div class="job-step-body">
+            <p class="job-step-label"><span class="evolve">「提案する力」が手に入る</span></p>
+            <p class="job-step-desc">自部署だけでなく、他部署や経営層に対して「この業務はAIでこう変えられる」と提案できるようになる。バックオフィスのAI推進リーダーへ。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="section-cta">
+  <button class="cta-btn fade-in" onclick="handleCTA()">
+    <svg class="line-svg" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="#FFF" fill-opacity=".22"/><path d="M11 4C7.134 4 4 6.71 4 10.05c0 2.72 1.8 5.07 4.45 6.12l-.56 2.08 2.44-1.35c.21.03.43.05.67.05 3.866 0 7-2.71 7-6.05C18 6.71 14.866 4 11 4z" fill="#FFF"/></svg>
+    <span class="cta-text" style="position:relative;z-index:1">無料でAI活用レベルを診断する →</span>
+  </button>
+  <p class="cta-sub">※無理な勧誘は一切ありません</p>
+</div>
+
+<!-- ===== Block 6: Testimonials ===== -->
+<section class="block testimonials">
+  <h2 class="testi-heading fade-in">受講前の自分が信じられない、<br>と言われます。</h2>
+  <div class="testi-card fade-in">
+    <div class="testi-header">
+      <div class="testi-avatar"><img src="assets/tanaka.png" alt="田中 美咲さん"></div>
+      <div><p class="testi-name">田中 美咲さん</p><p class="testi-meta">30代・営業事務</p></div>
+    </div>
+    <div class="testi-ba">
+      <div class="testi-ba-item testi-ba-before"><span class="testi-ba-label">Before</span>ChatGPTにたまに質問する程度。AIについて聞かれても答えられなかった。</div>
+      <div class="testi-ba-item testi-ba-after"><span class="testi-ba-label">After</span>チームで「AIのことなら田中さん」と言われる存在に。</div>
+    </div>
+    <div class="testi-quote">毎週のAIニュースのキュレーションが本当に価値がありました。最初は"自分にできるのかな"と不安でしたが、コーチが毎週横にいてくれるので、気づいたら別人のようになっていました。</div>
+  </div>
+  <div class="testi-card fade-in">
+    <div class="testi-header">
+      <div class="testi-avatar"><img src="assets/sato.jpg" alt="佐藤 健一さん"></div>
+      <div><p class="testi-name">佐藤 健一さん</p><p class="testi-meta">40代・マーケティング部長</p></div>
+    </div>
+    <div class="testi-ba">
+      <div class="testi-ba-item testi-ba-before"><span class="testi-ba-label">Before</span>部下の方がAIに詳しくて、会議で居心地が悪かった。</div>
+      <div class="testi-ba-item testi-ba-after"><span class="testi-ba-label">After</span>GA4レポート自動化に成功。部署のAI推進をリード。</div>
+    </div>
+    <div class="testi-quote">正直、40代の自分にできるのか不安でした。でも自分の業務に合わせてカリキュラムを組んでくれるので、無駄なく学べました。部下にも勧めて、チーム全体のAI活用が進みました。</div>
+  </div>
+  <p class="testi-note">※画像はイメージです</p>
+</section>
+
+<!-- ===== Block 7: Mid CTA ===== -->
+<section class="block mid-cta">
+  <h2 class="mid-cta-heading fade-in">あなたのAI活用レベルを、<br><span class="accent">無料</span>で診断しませんか？</h2>
+  <p class="mid-cta-sub fade-in">面談であなた専用のAI学習ロードマップ案を、無料でお渡しします。</p>
+  <button class="cta-btn fade-in" onclick="handleCTA()">
+    <svg class="line-svg" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="#FFF" fill-opacity=".22"/><path d="M11 4C7.134 4 4 6.71 4 10.05c0 2.72 1.8 5.07 4.45 6.12l-.56 2.08 2.44-1.35c.21.03.43.05.67.05 3.866 0 7-2.71 7-6.05C18 6.71 14.866 4 11 4z" fill="#FFF"/></svg>
+    <span class="cta-text" style="position:relative;z-index:1">無料でAI活用レベルを診断する →</span>
+  </button>
+  <p class="cta-sub">※無理な勧誘は一切ありません</p>
+</section>
+
+<!-- ===== Community Section ===== -->
+<section class="block community">
+  <p class="section-label fade-in">卒業後のサポート</p>
+  <h2 class="community-heading fade-in">卒業して終わりじゃない。<br>その先も、ずっと。</h2>
+  <p class="community-lead fade-in">AIの世界は毎週変わる。3ヶ月で身につけたスキルも、アップデートし続けなければすぐに陳腐化します。<br><br>だからCodeBoostは、卒業後も「AIに詳しい人」でい続けるための仕組みを用意しています。</p>
+
+  <div class="community-card fade-in">
+    <span class="community-card-num">1</span>
+    <h3 class="community-card-title">毎週届くAI最新情報キュレーション</h3>
+    <p class="community-card-desc">プロが厳選した「今週押さえるべきAIニュース」が毎週届く。読むだけで最前線をキャッチアップし続けられる。</p>
+  </div>
+  <div class="community-card fade-in">
+    <span class="community-card-num">2</span>
+    <h3 class="community-card-title">月1〜2回の勉強会・ライブセッション</h3>
+    <p class="community-card-desc">最新ツールのハンズオンや、受講生同士のナレッジシェア。卒業後も学び続ける環境。</p>
+  </div>
+  <div class="community-card fade-in">
+    <span class="community-card-num">3</span>
+    <h3 class="community-card-title">卒業生コミュニティ</h3>
+    <p class="community-card-desc">同じ志を持つ仲間とつながり続ける。AIの最新情報や活用事例を共有し合える場。</p>
+  </div>
+
+  <div class="community-highlight fade-in">
+    <p class="community-highlight-text">本講座に入会すると、このコミュニティに<br><span class="accent-green">1年間無料</span>でアクセスできます。</p>
+  </div>
+  <p class="community-note fade-in">※ 通常は月額5,000円の有料コミュニティです</p>
+</section>
+
+<!-- ===== Block 8: Differentiation ===== -->
+<section class="block diff">
+  <h2 class="diff-heading fade-in">AIを学ぶ場所は山ほどある。<br><span class="accent">"やり切れる場所"</span>は、<br>ほとんどない。</h2>
+  <div class="diff-card diff-gray fade-in">
+    <span class="diff-label">独学（YouTube / Udemy）</span>
+    <h3 class="diff-title">情報は無限にある。でも...</h3>
+    <p class="diff-text">「あなたが今何を学ぶべきか」は誰も教えてくれない。断片的な知識が積み上がるだけで、体系的なスキルにならない。そして何より、独学は続かない。</p>
+  </div>
+  <div class="diff-card diff-gray fade-in">
+    <span class="diff-label">一般的なAIスクール</span>
+    <h3 class="diff-title">全員が同じカリキュラム。でも...</h3>
+    <p class="diff-text">営業の人とエンジニアの人が同じことを学んでも意味がない。固定カリキュラムでは、あなたの業務に直結するスキルは身につかない。</p>
+  </div>
+  <div class="diff-card diff-highlight fade-in">
+    <span class="diff-label">CodeBoost</span>
+    <h3 class="diff-title">あなた専用 × 最新情報 × 伴走</h3>
+    <p class="diff-text">完全パーソナライズのカリキュラム × 毎週届く最新AI情報 × 専属コーチの伴走。<strong>この3つが揃っている場所は、他にない。</strong></p>
+  </div>
+</section>
+
+<!-- ===== Block 9: Final CTA ===== -->
+<section class="block final-cta">
+  <h2 class="final-heading fade-in">まずは無料で、<br>あなたのAI活用レベルを<br>診断してみませんか？</h2>
+  <p class="final-sub fade-in">
+    無料面談では、あなたの職種・業務に合わせたAI学習ロードマップ案を、その場で作成してお渡しします。<br><br>
+    "AIで自分の業務がどう変わるか"が、面談を受けるだけで見えてきます。<br><br>
+    面談を受けるだけでも、十分価値があります。
+  </p>
+  <div class="final-card fade-in">
+    <div class="trust-badge">30秒で完了</div>
+    <button class="cta-btn" onclick="handleCTA()">
+      <svg class="line-svg" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="#FFF" fill-opacity=".22"/><path d="M11 4C7.134 4 4 6.71 4 10.05c0 2.72 1.8 5.07 4.45 6.12l-.56 2.08 2.44-1.35c.21.03.43.05.67.05 3.866 0 7-2.71 7-6.05C18 6.71 14.866 4 11 4z" fill="#FFF"/></svg>
+      <span class="cta-text" style="position:relative;z-index:1">無料でAI活用レベルを診断する →</span>
+    </button>
+    <p class="final-note">※無理な勧誘は一切ありません ※所要時間20分程度</p>
+  </div>
+</section>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <button class="cta-btn" onclick="handleCTA()">
+    <svg class="line-svg" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="6" fill="#FFF" fill-opacity=".22"/><path d="M11 4C7.134 4 4 6.71 4 10.05c0 2.72 1.8 5.07 4.45 6.12l-.56 2.08 2.44-1.35c.21.03.43.05.67.05 3.866 0 7-2.71 7-6.05C18 6.71 14.866 4 11 4z" fill="#FFF"/></svg>
+    <span class="cta-text-short" style="position:relative;z-index:1">無料でAI活用レベルを診断 →</span>
+  </button>
+</div>
+
+<!-- Thanks -->
+<div id="thanks-overlay">
+  <div class="thanks-card">
+    <div class="thanks-check"></div>
+    <p class="thanks-title">ありがとうございます！</p>
+    <p class="thanks-sub">LINEに移動します...</p>
+  </div>
+</div>
+<div class="spacer"></div>
+
+<script>
+var copies={
+  1:{main:'あなたはまだ、<br>AIの<span class="accent">「本当の力」</span>を<br>知らない。',sub:'あなた専用のAI学習ロードマップで、<br>3ヶ月で全部知る。'},
+  2:{main:'「何から学べばいいか<br>わからない」が、<span class="accent">終わる。</span>',sub:'あなた専用のAI学習ロードマップを、<br>プロが設計します。'},
+  3:{main:'3ヶ月で、社内で<br><span class="accent">AIに一番詳しい人</span>になる。',sub:'あなた専用のカリキュラム × 最新AI情報<br>× 専属コーチの伴走。'},
+  4:{main:'AIの進化に、<br>もう<span class="accent">置いていかれない。</span>',sub:'あなたの職種に合わせたAI学習を、<br>専属コーチと3ヶ月で。'},
+  5:{main:'経費精算、議事録、競合調査。<br><span class="accent">全部、AIに任せられる時代。</span>',sub:'あなたの業務が変わるAI活用法を、<br>あなた専用のカリキュラムで。'},
+  6:{main:'あなた専用の<span class="accent">AI学習ロードマップ</span>で、<br>「AIがわかる人」になる3ヶ月。',sub:'職種 × 業務 × 目標に合わせた<br>完全オリジナルのカリキュラム。'},
+  7:{main:'あなたの職種に合った<span class="accent">AI学習プラン</span> ×<br>毎週届く最新AI情報 ×<br>専属コーチの伴走。',sub:'3ヶ月で、AIを武器にする。'},
+  8:{main:'3ヶ月後、<br>AIの話になったとき、<br>あなたは<span class="accent">黙っていられなくなる。</span>',sub:'あなた専用のAI学習プログラムで、<br>知識が溢れ出す人になる。'}
+};
+var ctaTexts={
+  1:{full:'無料でAI活用レベルを診断する →',short:'無料でAI活用レベルを診断 →'},
+  2:{full:'あなただけのAI学習ロードマップを作成する →',short:'AI学習ロードマップを作成 →'}
+};
+var params=new URLSearchParams(window.location.search);
+var cr=parseInt(params.get('cr'))||1;
+var ctaVer=parseInt(params.get('cta'))||1;
+var copy=copies[cr]||copies[1];
+var cta=ctaTexts[ctaVer]||ctaTexts[1];
+document.getElementById('fv-main').innerHTML=copy.main;
+document.getElementById('fv-sub').innerHTML=copy.sub;
+document.querySelectorAll('.cta-text').forEach(function(el){el.textContent=cta.full;});
+document.querySelectorAll('.cta-text-short').forEach(function(el){el.textContent=cta.short;});
+
+// ★ https://lin.ee/XXXXXXX を実際のLINE友だち追加URLに差し替えてください
+var LINE_BASE_URL='https://lin.ee/XXXXXXX';
+function buildLineURL(){
+  var keep=['cr','cta','utm_source','utm_medium','utm_campaign','utm_content'];
+  var lp=new URLSearchParams();
+  keep.forEach(function(k){var v=params.get(k);if(v)lp.set(k,v);});
+  var qs=lp.toString();return qs?LINE_BASE_URL+'?'+qs:LINE_BASE_URL;
+}
+function handleCTA(){
+  document.getElementById('thanks-overlay').classList.add('active');
+  fbq('track','Lead');
+  setTimeout(function(){window.location.href=buildLineURL();},1500);
+}
+var fo=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');fo.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.fade-in').forEach(function(el){fo.observe(el);});
+var sticky=document.getElementById('sticky-cta');
+new IntersectionObserver(function(entries){
+  entries.forEach(function(e){e.isIntersecting?sticky.classList.remove('show'):sticky.classList.add('show');});
+},{threshold:0}).observe(document.getElementById('fv-cta'));
+var carousel=document.getElementById('s-carousel');
+var dots=document.querySelectorAll('.s-dot');
+carousel.addEventListener('scroll',function(){
+  var w=carousel.querySelector('.s-card').offsetWidth+14;
+  var i=Math.round(carousel.scrollLeft/w);
+  dots.forEach(function(d,idx){d.classList.toggle('active',idx===i);});
+});
+document.querySelectorAll('.job-tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.job-tab').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.job-panel').forEach(function(p){p.classList.remove('active');});
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
