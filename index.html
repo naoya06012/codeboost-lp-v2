@@ -148,26 +148,24 @@ img{max-width:100%;height:auto;display:block}
   overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,.12);
   border:1px solid rgba(0,0,0,.04);
 }
-.s-card-img{width:100%;height:auto;object-fit:cover;border-radius:8px 8px 0 0}
 .s-card-img{width:100%;height:170px;object-fit:cover}
 .s-card-body{padding:18px 18px 10px}
 .s-card-title{font-size:16px;font-weight:900;line-height:1.55;margin-bottom:8px}
 .s-card-desc{font-size:13px;color:#555;line-height:1.8}
 .ba-container{
-  display:flex;align-items:center;gap:10px;padding:16px 18px;
-  background:#f5f5f5;border-radius:0 0 16px 16px;
+  display:flex;align-items:center;gap:8px;padding:12px 14px;
+  background:#f5f5f5;border-radius:10px;margin-top:12px;
 }
-.ba-before,.ba-after{flex:1}
+.ba-before,.ba-after{flex:1;text-align:center}
 .ba-label{
-  display:block;font-size:10px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;margin-bottom:4px;
+  display:block;font-size:10px;font-weight:700;letter-spacing:.05em;
+  margin-bottom:4px;
 }
-.ba-before .ba-label{color:#bbb}
+.ba-before .ba-label{color:#999}
 .ba-after .ba-label{color:#06C755}
-.ba-before .ba-text{font-size:13px;color:#999;text-decoration:line-through}
-.ba-after .ba-text{font-size:13px;color:#222;font-weight:700}
-.ba-after .ba-text strong{font-size:17px;color:#E8380D;font-weight:900}
-.ba-arrow{color:#E8380D;font-size:20px;font-weight:900;flex-shrink:0}
+.ba-before .ba-text{font-size:13px;color:#999;text-decoration:line-through;line-height:1.4}
+.ba-after .ba-text{font-size:13px;color:#222;font-weight:700;line-height:1.4}
+.ba-arrow{color:#E8380D;font-size:16px;flex-shrink:0}
 .s-dots{display:flex;justify-content:center;gap:6px;margin-top:16px}
 .s-dot{width:6px;height:6px;border-radius:50%;background:#ddd;transition:background .3s}
 .s-dot.active{background:#E8380D}
@@ -568,60 +566,60 @@ img{max-width:100%;height:auto;display:block}
       <img class="s-card-img" src="images/carousel-1.png" alt="AIがブラウザ操作">
       <div class="s-card-body">
         <h3 class="s-card-title">AIがブラウザ操作</h3>
-        <p class="s-card-desc">Webの経費精算、勤怠の打刻修正、求人媒体への掲載、社内システムへのデータ入力——。ブラウザ上で人間がやっていた操作を、AIがそのまま代行する時代が来ている。ログイン、入力、選択、クリック、送信。全部、自動。</p>
+        <p class="s-card-desc">経費精算、勤怠修正、データ入力——ブラウザ上の定型作業を、AIがそのまま代行する。ログインからクリックまで、全部自動。</p>
       </div>
       <div class="ba-container">
-        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">毎日のPC定型作業</span></div>
-        <div class="ba-arrow">→</div>
-        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">AIが<strong>全自動</strong>で完了</span></div>
+        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">PC定型作業 毎日</span></div>
+        <span class="ba-arrow">→</span>
+        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">AIが全自動</span></div>
       </div>
     </div>
     <div class="s-card fade-in">
       <img class="s-card-img" src="images/carousel-2.png" alt="動画編集の自動化">
       <div class="s-card-body">
         <h3 class="s-card-title">動画編集の自動化</h3>
-        <p class="s-card-desc">YouTube動画、SNSのショート、社内研修の教材、採用PR動画——。素材を渡して「こういう構成で」と指示するだけで、カット編集からテロップ、BGM選定、書き出しまでAIが処理する。従来なら何時間もかかっていた編集工程を、圧倒的に短縮できる。</p>
+        <p class="s-card-desc">素材を渡して構成を伝えるだけ。カット、テロップ、BGM、書き出しまでAIが処理。プロレベルの動画が、圧倒的なスピードで仕上がる。</p>
       </div>
       <div class="ba-container">
-        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">動画1本に3時間以上</span></div>
-        <div class="ba-arrow">→</div>
-        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">AIが編集、人間は<strong>最終チェック</strong>だけ</span></div>
+        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">動画1本 3時間</span></div>
+        <span class="ba-arrow">→</span>
+        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">指示だけで完成</span></div>
       </div>
     </div>
     <div class="s-card fade-in">
       <img class="s-card-img" src="images/carousel-3.png" alt="独自アプリ開発">
       <div class="s-card-body">
         <h3 class="s-card-title">独自アプリ開発</h3>
-        <p class="s-card-desc">顧客管理、在庫管理、日報システム、社内の予約フォーム、タスク管理ツール——。「こういうのが欲しい」とAIに伝えるだけで、検索・フィルター・ダッシュボードまで備えた本格Webアプリが完成する。プログラミング経験は一切不要。コードは1行も書かない。</p>
+        <p class="s-card-desc">「こういうアプリが欲しい」と伝えるだけ。検索もフィルターもダッシュボードも付いた本格Webアプリが、コードなしで完成する。</p>
       </div>
       <div class="ba-container">
-        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">外注で数十万、納期1ヶ月</span></div>
-        <div class="ba-arrow">→</div>
-        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">自分で作れる。しかも<strong>無料</strong>。</span></div>
+        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">外注 数十万円</span></div>
+        <span class="ba-arrow">→</span>
+        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">自分で無料</span></div>
       </div>
     </div>
     <div class="s-card fade-in">
       <img class="s-card-img" src="images/carousel-4.png" alt="外出先からPC操作">
       <div class="s-card-body">
         <h3 class="s-card-title">外出先からPC操作</h3>
-        <p class="s-card-desc">「あの資料をメールしておいて」「見積書を印刷しておいて」「Excelのあの数字を更新しておいて」——。出先のスマホからAIに指示するだけで、オフィスのPCが動く。ファイル操作もメール送信もソフトの起動も。もう「帰社しないと対応できない」がなくなる。</p>
+        <p class="s-card-desc">スマホからAIに指示するだけで、オフィスのPCが動く。メール送信もファイル操作も、もう帰社しなくていい。</p>
       </div>
       <div class="ba-container">
-        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">急な対応は帰社が必要</span></div>
-        <div class="ba-arrow">→</div>
-        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">外出先から<strong>AIが代行</strong></span></div>
+        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">帰社して対応</span></div>
+        <span class="ba-arrow">→</span>
+        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">その場で完了</span></div>
       </div>
     </div>
     <div class="s-card fade-in">
       <img class="s-card-img" src="images/carousel-5.png" alt="AIがデスクトップアプリを操作">
       <div class="s-card-body">
         <h3 class="s-card-title">AIがデスクトップアプリを操作</h3>
-        <p class="s-card-desc">Excel、PowerPoint、Word、会計ソフト、CRM——。「月次レポートを作って」「このデータをグラフにして」と指示すれば、AIがソフトを立ち上げ、操作し、完成品を出力する。あなたがPCの前で費やしていた「作業時間」が、丸ごと消える。</p>
+        <p class="s-card-desc">Excel、PowerPoint、会計ソフト——「これやっておいて」で、AIがソフトを操作してレポートを完成させる。あなたの作業時間が消える。</p>
       </div>
       <div class="ba-container">
-        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">手作業でレポート半日</span></div>
-        <div class="ba-arrow">→</div>
-        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">AIが操作、<strong>1分</strong>で完成</span></div>
+        <div class="ba-before"><span class="ba-label">Before</span><span class="ba-text">手作業 半日</span></div>
+        <span class="ba-arrow">→</span>
+        <div class="ba-after"><span class="ba-label">After</span><span class="ba-text">AIが1分で完成</span></div>
       </div>
     </div>
   </div>
